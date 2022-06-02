@@ -52,7 +52,7 @@ function showResults(evt) {
 }
 
 function filteResultsByBorough(data){
-    { boroughsToFetch.forEach ((bTF)=> data.forEach((dRS) =>{if (bTF == dRS.borough){ complaintsArray.push(dRS)} })); return complaintsArray.sort((a,b)=>{a.closed_date>b.closed_date})}
+    { boroughsToFetch.forEach ((bTF)=> data.forEach((dRS) =>{if (bTF == dRS.borough){ complaintsArray.push(dRS)} })); return complaintsArray.sort((a,b)=>{return (a.closed_date>b.closed_date)? -1 : ((a.closed_date < b.closed_date)? 1 : 0)})}
 }
 
 //POPULATE site
