@@ -108,7 +108,14 @@ function populateTable (complaintsArray){
     const descDiv = document.createElement("div")
     descDiv.setAttribute("id", `description${i}`);
     descDiv.setAttribute("class", "long hidden")
-    descDiv.textContent = complaintsArray[i].resolution_description
+    let popoResponse
+    if(complaintsArray[i].resolution_description == undefined)
+    { popoResponse = `The case is still open`
+    }else{
+        popoResponse = complaintsArray[i].resolution_description
+    }
+
+    descDiv.textContent = `${complaintsArray[i].descriptor} / Police Response: ${popoResponse}`
     //appending
     resultsPanel.appendChild(imgDiv)
     resultsPanel.appendChild(dateDiv)
