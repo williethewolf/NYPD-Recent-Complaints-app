@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link rel="stylesheet" href="style.css">
+          <title>Document</title>
+          <script src="script.js" defer></script>
+      </head>
+      <body>
+          <h1>Most recent Complaints to the NYPD by Borough in NY</h1>
+        <form>
+            <div>
+                <!-- <video width="100%" loop>
+                    <source src="./imgs/siren.webm" type="video/webm"> -->
+                <ul id="borough-nav">
+                    <li class = "nav-button"><button class="borough">Manhattan</button></li>
+                    <li class = "nav-button"><button class="borough">Brooklyn</button></li>
+                    <li class = "nav-button"><button class="borough">Queens</button></li>
+                    <li class = "nav-button"><button class="borough">Staten Island</button></li>
+                    <li class = "nav-button"><button class="borough">Bronx</button></li>
+                </ul>
+                </div>
+            
+            <div id="search-bar-panel">
+                <label for="results-n">Number of results:</label>
+                <input type="tel" id="results-n" name="results-n" maxlength="3" placeholder="10" >
+                <button id="results-button">Show complaints</button>
+            </div>
+        </form>
+        <div id="results-panel">
+        </div>
+          
+      </body>
+      </html>
