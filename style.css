@@ -6,6 +6,10 @@ h1{
     text-align: center;
 }
 
+h4{
+    text-align: center;
+}
+
 input[type=tel] {
     width: 45px;
     padding: 8px 6px;

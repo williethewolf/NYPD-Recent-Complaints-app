@@ -1,4 +1,11 @@
-apiUrl = "https://data.cityofnewyork.us/resource/erm2-nwe9.json?agency=NYPD"
+const currentTime = new Date();
+const previousDay = new Date(currentTime.getTime());
+previousDay.setDate(currentTime.getDate() - 1);
+previousDay.toISOString().slice(0,10)
+
+console.log(previousDay.toISOString().slice(0,10))
+
+apiUrl = `https://data.cityofnewyork.us/resource/erm2-nwe9.json?agency=NYPD&$where=created_date  > '${previousDay.toISOString().slice(0,10)}'` //${currentTime}`
 
 
 //HTML FETCHERS and Event Listeners
@@ -47,17 +54,24 @@ function showResults(evt) {
         .then(data => filteResultsByBorough(data))
         .then(curatedInfo => {populateTable(curatedInfo); return curatedInfo})
         .then(publish => {console.log(publish); return})
-        // .catch(error => alert("Somethin went wrong",error))
+        .catch(error => alert("Somethin went wrong",error))
         
 }
 
 function filteResultsByBorough(data){
-    { boroughsToFetch.forEach ((bTF)=> data.forEach((dRS) =>{if (bTF == dRS.borough){ complaintsArray.push(dRS)} })); return complaintsArray.sort((a,b)=>{return (a.closed_date>b.closed_date)? -1 : ((a.closed_date < b.closed_date)? 1 : 0)})}
+    { boroughsToFetch.forEach ((bTF)=> data.forEach((dRS) =>{if (bTF == dRS.borough){ complaintsArray.push(dRS)} })); return complaintsArray.sort((a,b)=>{return (a.created_date > b.created_date)? -1 : ((a.created_date < b.created_date)? 1 : 0)})}
 }
 
 //POPULATE site
 function populateTable (complaintsArray){
- for (let i =0; i<numberOfResultsInput.value; i++){
+    let numberRequestedbyUser 
+    if (numberOfResultsInput.value <= complaintsArray.length ){
+        numberRequestedbyUser =numberOfResultsInput.value
+    }else{
+        numberRequestedbyUser = complaintsArray.length
+    }
+    console.log(numberRequestedbyUser)
+    for (let i =0; i<numberRequestedbyUser; i++){
     //image div
     const imgDiv = document.createElement("div")
     // const image = document.createElement('img')
@@ -73,8 +87,8 @@ function populateTable (complaintsArray){
     imgDiv.appendChild(image)
     //date
     const dateDiv = document.createElement("div")
-    console.log(String(complaintsArray[i].closed_date))
-    dateDiv.innerHTML = convertFromStringToDate(String(complaintsArray[i].closed_date))
+    console.log(String(complaintsArray[i].created_date))
+    dateDiv.innerHTML = convertFromStringToDate(String(complaintsArray[i].created_date))
     dateDiv.setAttribute("class","time-div")
     //dateDiv.textContent = complaintsArray[i].closed_date
     //title div
@@ -123,10 +137,10 @@ function showHiddenInfo(evt){
 }
 //Garbage API dates into human formatting
 function convertFromStringToDate(dateFromApi) {
-    console.log("se ejecuta")
-    console.log(dateFromApi)
+    // console.log("se ejecuta")
+    // console.log(dateFromApi)
     const cleandate = new Date(dateFromApi)
-    console.log(cleandate)
+    // console.log(cleandate)
     return cleandate.toLocaleString().replace(',', '<br>')
 }
 
