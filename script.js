@@ -3,7 +3,7 @@ const previousDay = new Date(currentTime.getTime());
 previousDay.setDate(currentTime.getDate() - 1);
 previousDay.toISOString().slice(0,10)
 
-console.log(previousDay.toISOString().slice(0,10))
+// console.log(previousDay.toISOString().slice(0,10))
 
 apiUrl = `https://data.cityofnewyork.us/resource/erm2-nwe9.json?agency=NYPD&$where=created_date  > '${previousDay.toISOString().slice(0,10)}'` //${currentTime}`
 
@@ -41,7 +41,7 @@ function passBoroughName(evt){
         boroughsToFetch = boroughsToFetch.filter((b)=>b!=evt.target.innerText.toUpperCase()) 
     }
 
-    console.log(boroughsToFetch)
+    // console.log(boroughsToFetch)
     
 }
 
@@ -70,7 +70,7 @@ function populateTable (complaintsArray){
     }else{
         numberRequestedbyUser = complaintsArray.length
     }
-    console.log(numberRequestedbyUser)
+    // console.log(numberRequestedbyUser)
     for (let i =0; i<numberRequestedbyUser; i++){
     //image div
     const imgDiv = document.createElement("div")
@@ -87,7 +87,7 @@ function populateTable (complaintsArray){
     imgDiv.appendChild(image)
     //date
     const dateDiv = document.createElement("div")
-    console.log(String(complaintsArray[i].created_date))
+    // console.log(String(complaintsArray[i].created_date))
     dateDiv.innerHTML = convertFromStringToDate(String(complaintsArray[i].created_date))
     dateDiv.setAttribute("class","time-div")
     //dateDiv.textContent = complaintsArray[i].closed_date
